@@ -1,25 +1,40 @@
+import { useState,useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+const [count , setcount] = useState(0);
+
+
+console.log(count);
+
+
+function Result(){
+  setcount(count+1);
+}
+
+useEffect(()=> {
+  
+if(count<5)
+{
+  setcount(count+1);
+}
+  
+
+},[count]);
+
+
+  return (  
+    <div>
+<h1 className='App'> Hello</h1>
+<h2 className='App'>{count}</h2>
+    
+<button onClick={Result}  >Click To increment The Number </button>    
+    
     </div>
-  );
+  )
+
 }
 
 export default App;
