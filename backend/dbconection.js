@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 function Dbconection()
 {
 
-const uir = "mongodb://localhost:27017"
+const dbUrl = "mongodb://localhost:27017/all-in-one"
 
-mongoose.connect(uir)
+mongoose.connect(dbUrl)
 .then(() => {
     console.log("Coneection Success");
     })
