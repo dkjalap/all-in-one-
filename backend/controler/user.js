@@ -12,9 +12,9 @@ async function handelUserSignup(req,res)
                 return res.status(400).json("create Strong password upper,lower,number,spical char use in password")
             }
        if(password != confromPassword){
-        return res.status(400).json("password and confrome password not match !");
+        return res.status(400).json({error: "password and confrome password not match !"});
        }
-       
+            
 
        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -46,20 +46,14 @@ console.log(result);
  
 
  async function handelUserLogin(req,res){
-
-    try{
-    const {email,password} = req.body;
+   const {email,password} = req.body;
+   console.log(req.body); 
      const data = await User.findOne({email,password});
-    if(!data){
-        return res.render("api/login",{error: "invalid username and password"});
+     return res.render("/api/all_user", data)
+    //     //console.log(data)
     }
-    return res.redirect("/api/all_user");
-        //console.log(data)
-    }
-    catch(err) { console.log("dont send empty",err)
-        return res.redirect("http://localhost:5000/user/api/login")  
-    }
- }
+    
+ 
 
 
 

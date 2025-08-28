@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-//import {Router,Route} from "react-router-dom";
-
-import Signup from "./signup";
+// import Signup from "./signup";
+import {useNavigate} from "react-router-dom";
+import {ToastContainer} from "react-toastify";
 
 
 
 export default function LoginPage() {
+const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-const [page,setpage] = useState();
+// const [page,setpage] = useState();
   
 
   // Handle input changes
@@ -20,16 +21,17 @@ const [page,setpage] = useState();
   };
 
   // Login button
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
+    
     console.log("Login with:", formData);
     //alert(`Logging in as ${formData.username}`);
   };
 
   // Signup button
   const handleSignup = (e) => {
-    setpage("signup")
-    console.log("Signup with:", page);
+    navigate("/signup")
+    // console.log("Signup with:", page);
     //alert(`Signing up with username: ${formData.username}`);
   };
 
@@ -51,6 +53,7 @@ const [page,setpage] = useState();
             name="username"
             value={formData.username}
             onChange={handleChange}
+            autoFocus
             placeholder="Enter username"
             className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
@@ -73,6 +76,7 @@ const [page,setpage] = useState();
         <div className="flex justify-between">
           <button
             type="button"
+            
             onClick={handleLogin}
             className="bg-blue-500 text-white px-5 py-2 rounded-xl hover:bg-blue-600 transition"
           >
@@ -80,6 +84,7 @@ const [page,setpage] = useState();
           </button>
           <button
             type="button"
+            
             onClick={handleSignup}
             className="bg-green-500 text-white px-5 py-2 rounded-xl hover:bg-green-600 transition"
           >
@@ -89,6 +94,7 @@ const [page,setpage] = useState();
           <button
             type="button"
             onClick={handleClear}
+            
             className="bg-gray-400 text-white px-5 py-2 rounded-xl hover:bg-gray-500 transition"
           >
             Clear
@@ -97,8 +103,10 @@ const [page,setpage] = useState();
         </div>
 
       </form>
-      {page === "signup" && <Signup />}
+      
+    <ToastContainer />
     </div>
     
   );
+  
 }
