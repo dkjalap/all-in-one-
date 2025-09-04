@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 // import Signup from "./signup";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
-
+import postApi from "../conectionApi/index"
+import homepage from "../pages/homepage";
 
 
 export default function LoginPage() {
 const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 // const [page,setpage] = useState();
@@ -22,11 +23,23 @@ const navigate = useNavigate();
 
   // Login button
   const handleLogin = async(e) => {
-    e.preventDefault();
-    
-    console.log("Login with:", formData);
-    //alert(`Logging in as ${formData.username}`);
-  };
+    // e.preventDefault();
+    try{
+    const response = await fetch("http://localhost:5000/user/api/login", {
+      method: "POST", 
+      headers: {"Content-Type": "application/json" },
+      body:JSON.stringify(formData)  
+    });
+    console.log(response)
+    if(response.success){
+    return navigate("/homepage")    
+      }}
+      catch(err){
+        return navigate("/login")
+      }
+
+
+  }
 
   // Signup button
   const handleSignup = (e) => {
@@ -37,7 +50,7 @@ const navigate = useNavigate();
 
   // Clear button
   const handleClear = () => {
-    setFormData({ username: "", password: "" });
+    setFormData({ email: "", password: "" });
   };
 
   return (
@@ -47,14 +60,14 @@ const navigate = useNavigate();
 
         {/* Username */}
         <div className="mb-4">
-          <label className="block text-gray-700 mb-1">Username</label>
+          <label className="block text-gray-700 mb-1">email</label>
           <input
             type="text"
-            name="username"
-            value={formData.username}
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             autoFocus
-            placeholder="Enter username"
+            placeholder="Enter email"
             className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { handleError } from "../until";
 
-
 export default function SignupForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -22,9 +21,9 @@ export default function SignupForm() {
   // Submit form
   const handleSubmit = async(e) => {
     e.preventDefault();
-    
+    try {
     const response = await fetch("http://localhost:5000/user/api/signup", {
-      method: "POST", //  "POST" likhna hota hai
+      method: "POST", 
       headers: {
         "Content-Type": "application/json" // backend ko batata hai ki data JSON format me hai
       },
@@ -32,9 +31,10 @@ export default function SignupForm() {
     });
 
     const data = await response.json(); // backend ka response JSON me convert
-    // console.log("Response:", data);
-  } 
-  
+    
+  } catch (err) {
+    return handleError('Something is missing')
+  }
 };
  
 

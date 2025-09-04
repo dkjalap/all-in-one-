@@ -1,29 +1,10 @@
-import {useState, useEffect} from "react";
-
-function Home(){
-
-    const [massage ,setmassage] = useState('');
-
-    useEffect(()=>{
-
-        fetch("http://localhost:5000/api/ms")
-        .then((res) => res.json())
-        .then((sms) =>  setmassage(sms))
-        
-
-    },[]);
+export default function homepage(){
 
 
+return (
 
-
-    return(
-        <div>   <h1>    Hello From home page {massage} </h1></div>
-    )
-
+    <div>   Helo Its homepage</div>
+)
 
 
 }
-
-
-
-export default Home;
