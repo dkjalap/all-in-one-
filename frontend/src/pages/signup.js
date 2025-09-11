@@ -22,7 +22,7 @@ export default function SignupForm() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-    const response = await fetch("http://localhost:5000/user/api/signup", {
+    const response = await fetch("http://localhost:5000/any/api/any/signup", {
       method: "POST", 
       headers: {
         "Content-Type": "application/json" // backend ko batata hai ki data JSON format me hai

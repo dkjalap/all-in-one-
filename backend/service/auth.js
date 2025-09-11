@@ -1,14 +1,18 @@
-const sessionIDMap = new Map();
+const jwt = require("jsonwebtoken")
+const key = "Yash";
 
-function setUser(id,user){
-    sessionIDMap.set(id,user);
-    console.log(sessionIDMap)
+
+function setUser(payload){
+const re = jwt.sign(payload, key)
+  return re
+  console.log(re)
+    
 }
 
 
-function getUser(id)
+function getUser(token)
 {
-    sessionIDMap.get(id);
+   return jwt.verify(token,key);
 }
 
 

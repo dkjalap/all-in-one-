@@ -5,6 +5,8 @@ const connectDB = require("./dbconection");
 const User = require("./model/user");
 const userRoute = require("./routes/user")
 const  anyRoute = require("./routes/any")
+const   {protectRoute} = require("./middelware/any")
+
 
 const app = express();
 app.use(cors());

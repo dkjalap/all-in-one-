@@ -1,5 +1,5 @@
 const any = require("../model/any");
-const {v7: uuid} = require("uuid");
+// const {v7: uuid} = require("uuid");
 const {setUser,getUser} = require("../service/auth");
 const { set } = require("mongoose");
 //const { set } = require("mongoose");
@@ -21,7 +21,9 @@ async function signupanyhandel(req,res) {
 async function  loginanyhandle(req,res){
 
     try{
+
     const {email,password} = req.body;
+    
     const result = await any.findOne({email,password});
     console.log(result)
     if(!result)
@@ -29,9 +31,9 @@ async function  loginanyhandle(req,res){
         return res.status(200).json("email and password worrng")    
             }
         
-        const sessionID = uuid();
-        setUser(sessionID,result)
-        res.cookie("teriID", sessionID)
+        // const sessionID = uuid();
+        token = setUser(result)
+        res.cookie("teriID", token)
            return res.status(201).json({sucess: true , massage: "Login success"})
  
     }
