@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {redirect, useNavigate} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import postApi from "../conectionApi/index"
-import homepage from "../pages/homepage";
+import Homepage from "./dashboard";
 
 
 export default function LoginPage() {
@@ -30,11 +30,14 @@ const navigate = useNavigate();
       headers: {"Content-Type": "application/json" },
       body:JSON.stringify(formData)  
     });
-    console.log(response)
-    if(response.success){
-    return navigate("/homepage")    
+
+    const data = await response.json();
+    console.log(data)
+    if(response.ok  ){
+    return navigate("/homepage");    
       }}
-      catch(err){
+      catch(error){
+        
         return navigate("/login")
       }
 

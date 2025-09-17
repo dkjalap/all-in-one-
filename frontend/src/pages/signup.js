@@ -22,7 +22,7 @@ export default function SignupForm() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-    const response = await fetch("http://localhost:5000/any/api/any/signup", {
+    const response = await fetch("http://localhost:5000/user/api/signup", {
       method: "POST", 
       headers: {
         "Content-Type": "application/json" // backend ko batata hai ki data JSON format me hai
@@ -31,7 +31,7 @@ export default function SignupForm() {
     });
 
     const data = await response.json(); // backend ka response JSON me convert
-    
+    console.log(data)
   } catch (err) {
     return handleError('Something is missing')
   }

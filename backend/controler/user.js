@@ -55,8 +55,9 @@ console.log(result);
    
    
      const {email,password} = req.body; 
-     console.log(req.body)
+     
           const data = await User.findOne({email:email,password:password})
+          console.log(data)
           if(!data){
           return res.status(900).json({error:"user and password wrong"})      
           }
