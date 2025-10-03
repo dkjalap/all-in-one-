@@ -33,9 +33,9 @@ const navigate = useNavigate();
 
     const data = await response.json();
     console.log(data)
-    if(response.ok  ){
-    return navigate("/homepage");    
-      }}
+    
+      if(response.ok){  return navigate("/homepage")}
+    }
       catch(error){
         
         return navigate("/login")

@@ -38,4 +38,4 @@ const userSchema = new mongooes.Schema({
 }, {timestamps: true});
 
 const User = mongooes.model('user', userSchema);
-module.exports = User;
+module.exports = User;    

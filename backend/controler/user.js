@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
 const { json } = require("express");
 const User = require("../model/user");
-// const {auth} = require("../service/auth");
+ const {setUser,getUser} = require("../service/auth");
 
 
 async function handelUserSignup(req,res)
 {
     
        const {name,lastname,username,email,password,confromPassword,mobile_Number} = req.body;
-       console.log(req.body)
+       
        if(password.length < 8){return res.status(400).json({pssworderror:"Pssword lenth minmum 8 char.."})}
        const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
         if(!strongPasswordRegex.test(password))
@@ -25,7 +25,7 @@ async function handelUserSignup(req,res)
       return res.status(400).json({emailerror: "Invalid email format" });
     }
 
-    console.log(req);
+    
      const result = await User.create({
         name,
         lastname,
@@ -56,18 +56,21 @@ console.log(result);
    
      const {email,password} = req.body; 
      
-          const data = await User.findOne({email:email,password:password})
-          console.log(data)
+    
+          const data = await User.findOne({email,password}).select({email: 1 , password: 1} )
+            console.log(data)  
           if(!data){
           return res.status(900).json({error:"user and password wrong"})      
           }
           // const skey = "yash";
           // const payload = {};
           // const token = jwt.sign(payload,skey);
-          // res.cookie("Token", token)
-          // console.log(token)
-          return res.status(200).json({success: true , massage: "Login Success" });
           
+          // console.log(token)
+          // const token = setUser;
+          // res.cookie("Token", token)
+          return res.status(200).json({success: true , massage: "Login Success",token});
+          console.log(token)
   }
     
     catch(error)
